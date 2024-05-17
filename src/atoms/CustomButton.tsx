@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Button, Theme, useTheme } from '@mui/material';
 import { FC, JSX, ReactNode } from 'react';
+import { colors } from '../utils/constant.ts';
 
 interface CustomButtonProps {
   label: string;
@@ -44,6 +45,7 @@ const StyledButton = styled(Button)(
   transition: background-color 0.3s, color 0.3s;
   &:hover {
     box-shadow: none;
+    color: ${colors.white};
   }
   ${theme.breakpoints.down('sm')} {
     font-size: 12px;
