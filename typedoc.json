@@ -1,0 +1,9 @@
+{
+  "entryPoints": [
+    "src/hooks/useFetchMovieDetails.tsx",
+    "src/hooks/useFetchMovies.tsx"
+  ],
+  "out": "docs",
+  "exclude": ["**/*.test.ts", "**/__mocks__/**"],
+  "tsconfig": "tsconfig.json"
+}
