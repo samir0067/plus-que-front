@@ -63,7 +63,8 @@ const content = {
   readMore: 'Read More',
 };
 
-const StyledCard = styled(Card)(({ theme }) => `
+const StyledCard = styled(Card)(
+  ({ theme }) => `
   max-width: 345px;
   margin: 20px;
   border-radius: 17px;

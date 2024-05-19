@@ -6,13 +6,6 @@ import { colors } from '../utils/constant';
 import { styled } from '@mui/material/styles';
 
 /**
- * Scrolls the window to the top with a smooth behavior.
- */
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-/**
  * This interface defines the props that the ScrollToTopButton component expects.
  */
 interface ScrollToTopButtonProps extends IconButtonProps {
@@ -29,8 +22,6 @@ interface ScrollToTopButtonProps extends IconButtonProps {
  */
 const ScrollToTopButton: FC<ScrollToTopButtonProps> = ({
   icon = <ArrowUpwardIcon />,
-  iconColors = colors.white,
-  border = `1px solid ${colors.white}`,
   ...rest
 }: ScrollToTopButtonProps) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,10 +44,8 @@ const ScrollToTopButton: FC<ScrollToTopButtonProps> = ({
     <StyledBox>
       <StyledIconButton
         {...rest}
-        iconColors={iconColors}
-        border={border}
         aria-label="scroll to top"
-        onClick={scrollToTop}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
         {icon}
       </StyledIconButton>
@@ -73,18 +62,16 @@ const StyledBox = styled(Box)`
   right: 24px;
 `;
 
-const StyledIconButton = styled(IconButton)<{ iconColors: string; border: string }>(({
-  iconColors,
-  border,
-}) => `
-  color: ${iconColors};
-  border: ${border};
+const StyledIconButton = styled(IconButton)`
+  color: ${colors.white};
+  border: 1px solid ${colors.white};
   z-index: 20;
   background-color: ${colors.primary};
   position: fixed;
   bottom: 20px;
   right: 20px;
+
   &:hover {
     background-color: ${colors.secondary};
   }
-`);
+`;

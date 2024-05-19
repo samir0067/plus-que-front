@@ -17,11 +17,19 @@ const TrendyMovies: FC = () => {
   const { data, loading, error } = useFetchMovies();
 
   if (loading) {
-    return <CenterContainer><CircularProgress /></CenterContainer>;
+    return (
+      <CenterContainer>
+        <CircularProgress />
+      </CenterContainer>
+    );
   }
 
   if (error) {
-    return <CenterContainer><Alert severity="error">{error}</Alert></CenterContainer>;
+    return (
+      <CenterContainer>
+        <Alert severity="error">{error}</Alert>
+      </CenterContainer>
+    );
   }
 
   if (!data) {
@@ -35,7 +43,7 @@ const TrendyMovies: FC = () => {
         {content.title}
       </Title>
       <MovieListContainer>
-        {data.results.map(movie => (
+        {data.results.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </MovieListContainer>
@@ -48,9 +56,9 @@ export default TrendyMovies;
 const content = {
   noData: 'No data available',
   title: 'Trendy Movie List',
-}
+};
 
-const StyledContainer = styled(Container) `
+const StyledContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +66,8 @@ const StyledContainer = styled(Container) `
   background-color: ${colors.gray};
 `;
 
-const Title = styled(Typography)(({ theme }) => `
+const Title = styled(Typography)(
+  ({ theme }) => `
   position: relative;
   font-family: 'Mulish', sans-serif;
   font-size: 3rem;
@@ -84,9 +93,11 @@ const Title = styled(Typography)(({ theme }) => `
       width: 100px;
     }
   }
-`);
+`,
+);
 
-const MovieListContainer = styled(Box)(({ theme }) => `
+const MovieListContainer = styled(Box)(
+  ({ theme }) => `
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -96,7 +107,8 @@ const MovieListContainer = styled(Box)(({ theme }) => `
     flex-direction: column;
     align-items: center;
   }
-`);
+`,
+);
 
 const CenterContainer = styled(Box)`
   display: flex;

@@ -30,11 +30,14 @@ const useFetchMovieDetails = (movieId: string): UseFetchMovieDetailsParams => {
 
     try {
       setLoading(true);
-      const response = await axios.get<MovieDetails | ApiError>(`https://api.themoviedb.org/3/movie/${movieId}`, {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
+      const response = await axios.get<MovieDetails | ApiError>(
+        `https://api.themoviedb.org/3/movie/${movieId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
         },
-      });
+      );
 
       console.log('response =>', response);
 

@@ -6,6 +6,7 @@ import { colors } from '../utils/constant.ts';
 import MovieDetails from '../pages/MovieDetails.tsx';
 import NotFound from '../pages/NotFound.tsx';
 import TrendyMovies from '../pages/TrendyMovies.tsx';
+import DrawerAppBar from './DrawerAppBar.tsx';
 
 /**
  * This Navigation functional Component sets up the routing for the application using React Router.
@@ -18,6 +19,7 @@ const Navigation: FC = () => {
 
   return (
     <BrowserRouter>
+      <DrawerAppBar />
       <MainBox theme={theme} component="main">
         <Routes>
           <Route path="/" element={<TrendyMovies />} />

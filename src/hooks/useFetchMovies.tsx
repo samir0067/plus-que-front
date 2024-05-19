@@ -29,11 +29,14 @@ const useFetchMovies = (): UseFetchMoviesParams => {
 
     try {
       setLoading(true);
-      const response = await axios.get<MovieResponse | ApiError>('https://api.themoviedb.org/3/movie/popular', {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
+      const response = await axios.get<MovieResponse | ApiError>(
+        'https://api.themoviedb.org/3/movie/popular',
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
         },
-      });
+      );
 
       if ('status_code' in response.data) {
         setError(response.data.status_message);

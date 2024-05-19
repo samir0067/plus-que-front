@@ -4,7 +4,6 @@ import useFetchMovieDetails from '../hooks/useFetchMovieDetails.tsx';
 const MovieDetails: FC = () => {
   const { movie, loading, error } = useFetchMovieDetails('12');
 
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
