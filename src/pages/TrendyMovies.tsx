@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Alert, Box, CircularProgress, Container, Typography } from '@mui/material';
 import useFetchMovies from '../hooks/useFetchMovies';
 import MovieCard from '../molecules/MovieCard';
+import ScrollToTopButton from '../molecules/ScrollToTopButton.tsx';
 import { styled } from '@mui/material/styles';
 import { colors } from '../utils/constant.ts';
 
@@ -29,6 +30,7 @@ const TrendyMovies: FC = () => {
 
   return (
     <StyledContainer maxWidth={false}>
+      <ScrollToTopButton />
       <Title variant="h3" gutterBottom>
         {content.title}
       </Title>
