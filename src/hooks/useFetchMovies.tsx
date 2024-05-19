@@ -8,13 +8,7 @@ interface UseFetchMoviesParams {
   error: string | null;
 }
 
-/**
- * This hook fetches trending movies from the API with pagination.
- * @param period The period for which to fetch trending movies.
- * @param page The page number to fetch.
- * @returns An object containing the fetched data, loading state, and error message.
- */
-const useFetchMovies = (period: 'day' | 'week', page: number): UseFetchMoviesParams => {
+const useFetchMovies = (period: 'day' | 'week', page: number, query?: string): UseFetchMoviesParams => {
   const [data, setData] = useState<MovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -28,14 +22,14 @@ const useFetchMovies = (period: 'day' | 'week', page: number): UseFetchMoviesPar
 
     try {
       setLoading(true);
-      const response = await axios.get<MovieResponse | ApiError>(
-        `https://api.themoviedb.org/3/trending/movie/${period}?page=${page}`,
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-          },
+      const url = query
+        ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&page=${page}`
+        : `https://api.themoviedb.org/3/trending/movie/${period}?page=${page}`;
+      const response = await axios.get<MovieResponse | ApiError>(url, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
         },
-      );
+      });
 
       if ('status_code' in response.data) {
         setError(response.data.status_message);
@@ -58,7 +52,7 @@ const useFetchMovies = (period: 'day' | 'week', page: number): UseFetchMoviesPar
     } finally {
       setLoading(false);
     }
-  }, [period, page]);
+  }, [period, page, query]);
 
   useEffect(() => {
     void fetchMovies();

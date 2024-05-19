@@ -7,12 +7,14 @@ import {
   FormControlLabel,
   Pagination,
   Switch,
+  TextField,
   Typography,
 } from '@mui/material';
 import useFetchMovies from '../hooks/useFetchMovies';
 import MovieCard from '../molecules/MovieCard';
 import ScrollToTopButton from '../molecules/ScrollToTopButton.tsx';
 import { styled } from '@mui/material/styles';
+import CustomButton from '../atoms/CustomButton.tsx';
 
 /**
  * TrendyMovies Component
@@ -20,13 +22,16 @@ import { styled } from '@mui/material/styles';
  * to fetch the movie data from an API. It displays a loading spinner while fetching the data, an error,
  * or there is data available, the MovieCard component is rendered for each movie in the list.
  * The component also has a toggle switch to switch between daily and weekly trending movies.
+ * It also has a search input to search for movies by name.
  * It also scrolls the window to the top when the component mounts.
  * @returns JSX.Element - The rendered component.
  */
 const TrendyMovies: FC = () => {
   const [period, setPeriod] = useState<'day' | 'week'>('day');
   const [page, setPage] = useState(1);
-  const { data, loading, error } = useFetchMovies(period, page);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [submittedQuery, setSubmittedQuery] = useState('');
+  const { data, loading, error } = useFetchMovies(period, page, submittedQuery);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,6 +43,15 @@ const TrendyMovies: FC = () => {
 
   const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
+  };
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    setSubmittedQuery(searchQuery);
+    setPage(1);
   };
 
   if (loading) {
@@ -70,6 +84,17 @@ const TrendyMovies: FC = () => {
         label={`${content.view} ${period === 'day' ? 'day' : 'week'}${content.trendingMovies}`}
         control={<Switch checked={period === 'week'} onChange={handleToggle} color="primary" />}
       />
+      <SearchContainer>
+        <TextField
+          label={content.labelSearch}
+          variant="outlined"
+          fullWidth
+          value={searchQuery}
+          sx={{ borderRadius: '20px' }}
+          onChange={handleSearchChange}
+        />
+        <CustomButton label={content.btnSearch} onClick={handleSearchSubmit} />
+      </SearchContainer>
       <MovieListContainer>
         {data.results.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
@@ -90,6 +115,8 @@ const content = {
   title: 'Trendy Movie List',
   view: 'View the',
   trendingMovies: "'s trending movies",
+  btnSearch: 'Search',
+  labelSearch: 'Search movie',
 };
 
 const StyledContainer = styled(Container)`
@@ -154,4 +181,12 @@ const PaginationContainer = styled(Box)`
   margin-top: 20px;
   display: flex;
   justify-content: center;
+`;
+
+const SearchContainer = styled(Box)`
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
 `;
