@@ -19,7 +19,7 @@ Application pour afficher les films tendances du jour ou de la semaine avec poss
     ```bash
       npm install
     ```
-   3. Configurez les variables d'environnement dans un fichier .env
+3. Configurez les variables d'environnement dans un fichier .env
    ```bash
       VITE_API_KEY=YOUR_API_KEY
    ```
