@@ -8,7 +8,11 @@ interface UseFetchMoviesParams {
   error: string | null;
 }
 
-const useFetchMovies = (period: 'day' | 'week', page: number, query?: string): UseFetchMoviesParams => {
+const useFetchMovies = (
+  period: 'day' | 'week',
+  page: number,
+  query?: string,
+): UseFetchMoviesParams => {
   const [data, setData] = useState<MovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

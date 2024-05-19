@@ -101,8 +101,12 @@ const TrendyMovies: FC = () => {
         ))}
       </MovieListContainer>
       <PaginationContainer>
-        <Pagination count={data.total_pages} page={page} onChange={handlePageChange}
-                    color="primary" />
+        <Pagination
+          count={data.total_pages}
+          page={page}
+          onChange={handlePageChange}
+          color="primary"
+        />
       </PaginationContainer>
     </StyledContainer>
   );
