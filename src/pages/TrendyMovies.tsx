@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import {
   Alert,
   Box,
   CircularProgress,
   Container,
   FormControlLabel,
+  Pagination,
   Switch,
   Typography,
 } from '@mui/material';
@@ -24,7 +25,8 @@ import { styled } from '@mui/material/styles';
  */
 const TrendyMovies: FC = () => {
   const [period, setPeriod] = useState<'day' | 'week'>('day');
-  const { data, loading, error } = useFetchMovies(period);
+  const [page, setPage] = useState(1);
+  const { data, loading, error } = useFetchMovies(period, page);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,6 +34,10 @@ const TrendyMovies: FC = () => {
 
   const handleToggle = () => {
     setPeriod((prev) => (prev === 'day' ? 'week' : 'day'));
+  };
+
+  const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
+    setPage(value);
   };
 
   if (loading) {
@@ -69,6 +75,10 @@ const TrendyMovies: FC = () => {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </MovieListContainer>
+      <PaginationContainer>
+        <Pagination count={data.total_pages} page={page} onChange={handlePageChange}
+                    color="primary" />
+      </PaginationContainer>
     </StyledContainer>
   );
 };
@@ -138,4 +148,10 @@ const CenterContainer = styled(Box)`
   justify-content: center;
   align-items: center;
   height: 100vh;
+`;
+
+const PaginationContainer = styled(Box)`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 `;

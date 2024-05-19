@@ -2,9 +2,6 @@ import axios, { AxiosError } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError, MovieResponse } from '../utils/types.ts';
 
-/**
- * Interface for useFetchMovies hook return parameters.
- */
 interface UseFetchMoviesParams {
   data: MovieResponse | null;
   loading: boolean;
@@ -12,11 +9,12 @@ interface UseFetchMoviesParams {
 }
 
 /**
- * This hook fetches trending movies from the API.
+ * This hook fetches trending movies from the API with pagination.
  * @param period The period for which to fetch trending movies.
+ * @param page The page number to fetch.
  * @returns An object containing the fetched data, loading state, and error message.
  */
-const useFetchMovies = (period: 'day' | 'week'): UseFetchMoviesParams => {
+const useFetchMovies = (period: 'day' | 'week', page: number): UseFetchMoviesParams => {
   const [data, setData] = useState<MovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +29,7 @@ const useFetchMovies = (period: 'day' | 'week'): UseFetchMoviesParams => {
     try {
       setLoading(true);
       const response = await axios.get<MovieResponse | ApiError>(
-        `https://api.themoviedb.org/3/trending/movie/${period}`,
+        `https://api.themoviedb.org/3/trending/movie/${period}?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${apiKey}`,
@@ -60,7 +58,7 @@ const useFetchMovies = (period: 'day' | 'week'): UseFetchMoviesParams => {
     } finally {
       setLoading(false);
     }
-  }, [period]);
+  }, [period, page]);
 
   useEffect(() => {
     void fetchMovies();
