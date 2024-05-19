@@ -39,8 +39,6 @@ const useFetchMovieDetails = (movieId: string): UseFetchMovieDetailsParams => {
         },
       );
 
-      console.log('response =>', response);
-
       if ('status_code' in response.data) {
         setError(response.data.status_message);
         return;

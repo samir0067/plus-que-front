@@ -2,20 +2,13 @@ import axios, { AxiosError } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError, MovieResponse } from '../utils/types.ts';
 
-/**
- * Interface for useFetchMovies hook return parameters.
- */
 interface UseFetchMoviesParams {
   data: MovieResponse | null;
   loading: boolean;
   error: string | null;
 }
 
-/**
- * Custom Hook to retrieve the movie list from the API.
- * @returns {UseFetchMoviesParams} List of films, loading status and errors.
- */
-const useFetchMovies = (): UseFetchMoviesParams => {
+const useFetchMovies = (period: 'day' | 'week', page: number, query?: string): UseFetchMoviesParams => {
   const [data, setData] = useState<MovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -29,14 +22,14 @@ const useFetchMovies = (): UseFetchMoviesParams => {
 
     try {
       setLoading(true);
-      const response = await axios.get<MovieResponse | ApiError>(
-        'https://api.themoviedb.org/3/movie/popular',
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-          },
+      const url = query
+        ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&page=${page}`
+        : `https://api.themoviedb.org/3/trending/movie/${period}?page=${page}`;
+      const response = await axios.get<MovieResponse | ApiError>(url, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
         },
-      );
+      });
 
       if ('status_code' in response.data) {
         setError(response.data.status_message);
@@ -59,7 +52,7 @@ const useFetchMovies = (): UseFetchMoviesParams => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [period, page, query]);
 
   useEffect(() => {
     void fetchMovies();

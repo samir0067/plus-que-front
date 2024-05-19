@@ -26,7 +26,10 @@ interface MobileDrawerProps {
  * @param {MobileDrawerProps} props - The props for the component.
  * @returns JSX.Element - The rendered component.
  */
-const MobileDrawer: FC<MobileDrawerProps> = ({ handleDrawerToggle, navItems }: MobileDrawerProps) => {
+const MobileDrawer: FC<MobileDrawerProps> = ({
+  handleDrawerToggle,
+  navItems,
+}: MobileDrawerProps) => {
   return (
     <DrawerContainer onClick={handleDrawerToggle}>
       <Typography component="h6" variant="subtitle1" m="10px">
