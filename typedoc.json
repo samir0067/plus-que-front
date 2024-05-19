@@ -4,6 +4,7 @@
     "src/hooks/useFetchMovieDetails.tsx",
     "src/hooks/useFetchMovies.tsx",
     "src/molecules/MovieCard.tsx",
+    "src/molecules/ScrollToTopButton.tsx",
     "src/organisms/Navigation.tsx",
     "src/pages/NotFound.tsx",
     "src/pages/TrendyMovies.tsx",
