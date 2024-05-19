@@ -1,0 +1,22 @@
+{
+  "entryPoints": [
+    "src/atoms/CustomButton.tsx",
+    "src/hooks/useFetchMovieDetails.tsx",
+    "src/hooks/useFetchMovies.tsx",
+    "src/molecules/MovieCard.tsx",
+    "src/molecules/ScrollToTopButton.tsx",
+    "src/molecules/MobileDrawer.tsx",
+    "src/molecules/CustomAppBar.tsx",
+    "src/organisms/Navigation.tsx",
+    "src/organisms/DrawerAppBar.tsx",
+    "src/pages/NotFound.tsx",
+    "src/pages/TrendyMovies.tsx",
+    "src/utils/constant.ts",
+    "src/utils/functions.ts",
+    "src/utils/theme.ts",
+    "src/utils/types.ts"
+  ],
+  "out": "docs",
+  "exclude": ["**/*.test.ts", "**/__mocks__/**"],
+  "tsconfig": "tsconfig.json"
+}

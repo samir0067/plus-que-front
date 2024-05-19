@@ -3,6 +3,9 @@ import { Button, Theme, useTheme } from '@mui/material';
 import { FC, JSX, ReactNode } from 'react';
 import { colors } from '../utils/constant.ts';
 
+/**
+ * This interface defines the props that the CustomButton component expects.
+ */
 interface CustomButtonProps {
   label: string;
   onClick: () => void;
@@ -11,6 +14,12 @@ interface CustomButtonProps {
   variant?: 'text' | 'outlined' | 'contained';
 }
 
+/**
+ * This functional component renders a customizable button using Material-UI.
+ * It supports various button variants, start and end icons, and custom click handling.
+ * @param {CustomButtonProps} props - The props for the component.
+ * @returns JSX.Element - The rendered component.
+ */
 const CustomButton: FC<CustomButtonProps> = ({
   label,
   onClick,
