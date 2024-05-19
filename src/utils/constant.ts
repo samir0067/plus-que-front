@@ -1,3 +1,6 @@
+/**
+ * This object defines a set of color constants used throughout the application.
+ */
 export const colors = {
   primary: '#FF7500',
   secondary: '#4BC0A1',

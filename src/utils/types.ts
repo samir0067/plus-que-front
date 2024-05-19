@@ -1,6 +1,5 @@
-
 /**
- * Interface for API errors.
+ * This interface defines the structure of an API error response.
  */
 export interface ApiError {
   success: boolean;
@@ -8,37 +7,54 @@ export interface ApiError {
   status_message: string;
 }
 
-
-export interface BelongsToCollection {
+/**
+ * This interface defines the structure of a collection to which a movie belongs.
+ */
+interface BelongsToCollection {
   id: number;
   name: string;
   poster_path: string;
   backdrop_path: string;
 }
 
-export interface Genre {
+/**
+ * This interface defines the structure of a movie genre.
+ */
+interface Genre {
   id: number;
   name: string;
 }
 
-export interface ProductionCompany {
+/**
+ * This interface defines the structure of a production company.
+ */
+interface ProductionCompany {
   id: number;
   logo_path: string | null;
   name: string;
   origin_country: string;
 }
 
-export interface ProductionCountry {
+/**
+ * This interface defines the structure of a production country.
+ */
+interface ProductionCountry {
   iso_3166_1: string;
   name: string;
 }
 
-export interface SpokenLanguage {
+/**
+ * This interface defines the structure of a spoken language.
+ */
+interface SpokenLanguage {
   english_name: string;
   iso_639_1: string;
   name: string;
 }
 
+/**
+ * This interface defines the detailed structure of a movie.
+ */
 export interface MovieDetails {
   adult: boolean;
   backdrop_path: string;
@@ -68,6 +84,9 @@ export interface MovieDetails {
   vote_count: number;
 }
 
+/**
+ * This interface defines the structure of a movie in the movie list response.
+ */
 export interface Movie {
   backdrop_path: string;
   id: number;
@@ -86,6 +105,9 @@ export interface Movie {
   vote_count: number;
 }
 
+/**
+ * This interface defines the structure of the movie list response from the API.
+ */
 export interface MovieResponse {
   page: number;
   results: Movie[];

@@ -7,6 +7,12 @@ import MovieDetails from '../pages/MovieDetails.tsx';
 import NotFound from '../pages/NotFound.tsx';
 import TrendyMovies from '../pages/TrendyMovies.tsx';
 
+/**
+ * This Navigation functional Component sets up the routing for the application using React Router.
+ * It includes routes for the home page, movie details page, and a not found page.
+ * It uses Material-UI for styling and layout.
+ * @returns JSX.Element - The rendered component.
+ */
 const Navigation: FC = () => {
   const theme = useTheme();
 

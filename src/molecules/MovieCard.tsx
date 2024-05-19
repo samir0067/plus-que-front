@@ -1,18 +1,24 @@
 import { FC, Fragment } from 'react';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Rating, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Movie } from '../utils/types.ts';
-import { truncateText } from '../utils/truncateText.ts';
+import { truncateText } from '../utils/functions.ts';
 
+/**
+ * This interface defines the props that the MovieCard component expects.
+ */
 interface MovieCardProps {
   movie: Movie;
 }
 
-
-const MovieCard: FC<MovieCardProps> = ({ movie }) => {
-  console.log('MovieCard ==>', movie);
+/**
+ * This functional component displays information about a movie in a card format.
+ * @param {MovieCardProps} props - The props for the component.
+ * @returns JSX.Element - The rendered component.
+ */
+const MovieCard: FC<MovieCardProps> = ({ movie }: MovieCardProps) => {
   const hasOverview = movie.overview && movie.overview.trim().length > 2;
-  const truncatedOverview = hasOverview ? truncateText(movie.overview, 50) : ''
+  const truncatedOverview = hasOverview ? truncateText(movie.overview, 65) : '';
 
   return (
     <StyledCard>
@@ -22,31 +28,40 @@ const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         alt={movie.title}
       />
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography component="h3" variant="h5" fontWeight="bold">
           {movie.title}
         </Typography>
-        <Typography mt="5px" variant="body2" component="div">
+        <Typography component="p" variant="body2" mt="5px">
           <strong>Lang:</strong> {movie.original_language}
         </Typography>
         {hasOverview && (
           <Fragment>
-            <Typography mt="5px"  variant="body1" component="div">
-              <strong>Description:</strong> {truncatedOverview}
+            <Typography component="p" variant="body2" mt="5px">
+              <strong>{content.overview}</strong> {truncatedOverview}
             </Typography>
           </Fragment>
         )}
-        <Typography mt="5px"  variant="body2">
-          <strong>Release Date:</strong> {movie.release_date}
+        <Typography component="p" variant="body2" mt="5px">
+          <strong>{content.releaseDate}</strong> {movie.release_date}
         </Typography>
-        <Typography mt="5px"  variant="body2">
-          <strong>Rating:</strong> {movie.vote_average} ({movie.vote_count} votes)
+        <Typography component="legend" variant="body2" mt="5px">
+          <strong>{content.rating}</strong> ({movie.vote_count} {content.voteCount})
         </Typography>
+        <Rating name="rating" value={movie.vote_average} max={10} readOnly />
       </CardContent>
     </StyledCard>
   );
 };
 
 export default MovieCard;
+
+const content = {
+  overview: 'Description:',
+  releaseDate: 'Release Date:',
+  rating: 'Rating:',
+  voteCount: 'votes',
+  readMore: 'Read More',
+};
 
 const StyledCard = styled(Card)(({ theme }) => `
   max-width: 345px;

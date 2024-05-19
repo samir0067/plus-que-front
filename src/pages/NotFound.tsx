@@ -5,6 +5,12 @@ import { styled } from '@mui/material/styles';
 import { FC } from 'react';
 import { colors } from '../utils/constant.ts';
 
+
+/**
+ * This functional component displays a "404 - Page not found" message. It provides two buttons
+ * for navigation: one to go back to the previous page and another to go to the home page.
+ * @returns JSX.Element - The rendered component.
+ */
 const NotFound: FC = () => {
   const navigate = useNavigate();
 

@@ -1,7 +1,16 @@
 {
   "entryPoints": [
+    "src/atoms/CustomButton.tsx",
     "src/hooks/useFetchMovieDetails.tsx",
-    "src/hooks/useFetchMovies.tsx"
+    "src/hooks/useFetchMovies.tsx",
+    "src/molecules/MovieCard.tsx",
+    "src/organisms/Navigation.tsx",
+    "src/pages/NotFound.tsx",
+    "src/pages/TrendyMovies.tsx",
+    "src/utils/constant.ts",
+    "src/utils/functions.ts",
+    "src/utils/theme.ts",
+    "src/utils/types.ts"
   ],
   "out": "docs",
   "exclude": ["**/*.test.ts", "**/__mocks__/**"],

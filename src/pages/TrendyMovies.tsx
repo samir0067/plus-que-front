@@ -1,28 +1,36 @@
 import { FC } from 'react';
 import { Alert, Box, CircularProgress, Container, Typography } from '@mui/material';
-import useFetchMovies from '../hooks/useFetchMovies.tsx';
-import MovieCard from '../molecules/MovieCard.tsx';
+import useFetchMovies from '../hooks/useFetchMovies';
+import MovieCard from '../molecules/MovieCard';
 import { styled } from '@mui/material/styles';
+import { colors } from '../utils/constant.ts';
 
+/**
+ * TrendyMovies Component
+ * This functional component displays a list of trendy movies. It uses the custom hook `useFetchMovies`
+ * to fetch the movie data from an API. It displays a loading spinner while fetching the data, an error,
+ * or there is data available, the MovieCard component is rendered for each movie in the list.
+ * @returns JSX.Element - The rendered component.
+ */
 const TrendyMovies: FC = () => {
   const { data, loading, error } = useFetchMovies();
 
   if (loading) {
-    return <LoadingContainer><CircularProgress /></LoadingContainer>;
+    return <CenterContainer><CircularProgress /></CenterContainer>;
   }
 
   if (error) {
-    return <ErrorContainer><Alert severity="error">{error}</Alert></ErrorContainer>;
+    return <CenterContainer><Alert severity="error">{error}</Alert></CenterContainer>;
   }
 
   if (!data) {
-    return <ErrorContainer>No data available</ErrorContainer>;
+    return <CenterContainer>{content.noData}</CenterContainer>;
   }
 
   return (
     <StyledContainer maxWidth={false}>
       <Title variant="h3" gutterBottom>
-        Movie List
+        {content.title}
       </Title>
       <MovieListContainer>
         {data.results.map(movie => (
@@ -35,14 +43,18 @@ const TrendyMovies: FC = () => {
 
 export default TrendyMovies;
 
-const StyledContainer = styled(Container)(({ theme }) => `
+const content = {
+  noData: 'No data available',
+  title: 'Trendy Movie List',
+}
+
+const StyledContainer = styled(Container) `
   display: flex;
-  background-color: ${theme.palette.background.default};
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: ${theme.palette.background.default};
-`);
+  background-color: ${colors.gray};
+`;
 
 const Title = styled(Typography)(({ theme }) => `
   position: relative;
@@ -84,14 +96,7 @@ const MovieListContainer = styled(Box)(({ theme }) => `
   }
 `);
 
-const LoadingContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
-
-const ErrorContainer = styled(Box)`
+const CenterContainer = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
