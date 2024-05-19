@@ -1,30 +1,30 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
+# TrendyMovies + React + TypeScript + Vite
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
 - Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Description
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Application pour afficher les films tendances du jour ou de la semaine avec possibilité de recherche par titre.
+
+## Installation
+
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/samir0067/plus-que-front.git
+   cd plus-que-front
+2. Installez les dépendances :
+    ```bash
+      npm install
+    ```
+   3. Configurez les variables d'environnement dans un fichier .env
+   ```bash
+      VITE_API_KEY=YOUR_API_KEY
+   ```
+
+4. Lancez l'application :
+    ```bash
+      npm run dev
+    ```
