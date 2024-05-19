@@ -4,7 +4,6 @@ import useFetchMovies from '../hooks/useFetchMovies';
 import MovieCard from '../molecules/MovieCard';
 import ScrollToTopButton from '../molecules/ScrollToTopButton.tsx';
 import { styled } from '@mui/material/styles';
-import { colors } from '../utils/constant.ts';
 
 /**
  * TrendyMovies Component
