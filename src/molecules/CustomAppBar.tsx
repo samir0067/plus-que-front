@@ -78,11 +78,13 @@ const TitleLink = styled(Typography)`
   display: block;
 }`.withComponent(Link);
 
-const NavBox = styled(Box)(({ theme }) => `
+const NavBox = styled(Box)(
+  ({ theme }) => `
   display: flex;
   ${theme.breakpoints.down('sm')} {
     display: none;
-  }`);
+  }`,
+);
 
 const NavButton = styled(Button)`
   color: ${colors.white};

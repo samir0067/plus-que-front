@@ -9,9 +9,7 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = [
-  { title: 'Home', path: '/' },
-];
+const navItems = [{ title: 'Home', path: '/' }];
 
 const DrawerAppBar: React.FC = (props: Props) => {
   const theme = useTheme();
@@ -45,7 +43,8 @@ const DrawerAppBar: React.FC = (props: Props) => {
 
 export default DrawerAppBar;
 
-const StyledDrawer = styled(Drawer)(({ theme }: { theme: Theme }) => `
+const StyledDrawer = styled(Drawer)(
+  ({ theme }: { theme: Theme }) => `
   display: block;
   & .MuiDrawer-paper { boxSizing: 'border-box', width: ${drawerWidth} }
   ${theme.breakpoints.up('sm')} {

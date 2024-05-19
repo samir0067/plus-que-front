@@ -34,12 +34,18 @@ const MovieDetails: FC = () => {
   }, []);
 
   if (!id) return <p>{content.noId}</p>;
-  if (loading) return (
-    <CenterContainer>
-      <CircularProgress />
-    </CenterContainer>
-  );
-  if (error) return <p>{content.error} {error}</p>;
+  if (loading)
+    return (
+      <CenterContainer>
+        <CircularProgress />
+      </CenterContainer>
+    );
+  if (error)
+    return (
+      <p>
+        {content.error} {error}
+      </p>
+    );
 
   return (
     <StyledContainer maxWidth="md">
@@ -127,7 +133,8 @@ const MovieDetails: FC = () => {
                   {content.average}
                 </Typography>
                 <Typography variant="body1" component="span">
-                  {roundVoteAverage(movie.vote_average)}{content.for} {movie.vote_count} {content.voteCount}
+                  {roundVoteAverage(movie.vote_average)}
+                  {content.for} {movie.vote_count} {content.voteCount}
                 </Typography>
               </DetailItem>
             </DetailBox>
@@ -164,14 +171,16 @@ const StyledContainer = styled(Container)`
   margin-top: 20px;
 `;
 
-const StyledCard = styled(Card)(({ theme }: { theme: Theme }) => `
+const StyledCard = styled(Card)(
+  ({ theme }: { theme: Theme }) => `
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   ${theme.breakpoints.down('md')} {
     flex-direction: column;
-  }`);
+  }`,
+);
 
 const CenterContainer = styled(Box)`
   display: flex;
@@ -189,4 +198,3 @@ const DetailItem = styled(Box)`
   justify-content: space-between;
   margin-bottom: 10px;
 `;
-

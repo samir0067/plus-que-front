@@ -4,7 +4,8 @@ import {
   Box,
   CircularProgress,
   Container,
-  FormControlLabel, Switch,
+  FormControlLabel,
+  Switch,
   Typography,
 } from '@mui/material';
 import useFetchMovies from '../hooks/useFetchMovies';
@@ -43,7 +44,9 @@ const TrendyMovies: FC = () => {
 
   if (error) {
     return (
-      <CenterContainer><Alert severity="error">{error}</Alert></CenterContainer>
+      <CenterContainer>
+        <Alert severity="error">{error}</Alert>
+      </CenterContainer>
     );
   }
 
