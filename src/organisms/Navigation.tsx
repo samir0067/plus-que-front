@@ -23,7 +23,7 @@ const Navigation: FC = () => {
       <MainBox theme={theme} component="main">
         <Routes>
           <Route path="/" element={<TrendyMovies />} />
-          <Route path="/movie" element={<MovieDetails />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </MainBox>

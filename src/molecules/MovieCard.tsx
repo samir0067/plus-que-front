@@ -3,6 +3,7 @@ import { Card, CardContent, CardMedia, Rating, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import { Movie } from '../utils/types.ts';
 import { truncateText } from '../utils/functions.ts';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * This interface defines the props that the MovieCard component expects.
@@ -19,9 +20,14 @@ interface MovieCardProps {
 const MovieCard: FC<MovieCardProps> = ({ movie }: MovieCardProps) => {
   const hasOverview = movie.overview && movie.overview.trim().length > 2;
   const truncatedOverview = hasOverview ? truncateText(movie.overview, 65) : '';
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/movie/${movie.id}`);
+  };
 
   return (
-    <StyledCard>
+    <StyledCard onClick={handleCardClick}>
       <CardMedia
         component="img"
         image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -68,6 +74,7 @@ const StyledCard = styled(Card)(
   max-width: 345px;
   margin: 20px;
   border-radius: 17px;
+  cursor: pointer;
   ${theme.breakpoints.down('sm')} {
     max-width: 100%;
   }`,

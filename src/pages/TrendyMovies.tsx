@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Alert, Box, CircularProgress, Container, Typography } from '@mui/material';
 import useFetchMovies from '../hooks/useFetchMovies';
 import MovieCard from '../molecules/MovieCard';
@@ -11,10 +11,15 @@ import { colors } from '../utils/constant.ts';
  * This functional component displays a list of trendy movies. It uses the custom hook `useFetchMovies`
  * to fetch the movie data from an API. It displays a loading spinner while fetching the data, an error,
  * or there is data available, the MovieCard component is rendered for each movie in the list.
+ * It also scrolls the window to the top when the component mounts.
  * @returns JSX.Element - The rendered component.
  */
 const TrendyMovies: FC = () => {
   const { data, loading, error } = useFetchMovies();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (loading) {
     return (
@@ -63,7 +68,6 @@ const StyledContainer = styled(Container)`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: ${colors.gray};
 `;
 
 const Title = styled(Typography)(
