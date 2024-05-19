@@ -1,5 +1,12 @@
-import { FC, useEffect } from 'react';
-import { Alert, Box, CircularProgress, Container, Typography } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Container,
+  FormControlLabel, Switch,
+  Typography,
+} from '@mui/material';
 import useFetchMovies from '../hooks/useFetchMovies';
 import MovieCard from '../molecules/MovieCard';
 import ScrollToTopButton from '../molecules/ScrollToTopButton.tsx';
@@ -10,15 +17,21 @@ import { styled } from '@mui/material/styles';
  * This functional component displays a list of trendy movies. It uses the custom hook `useFetchMovies`
  * to fetch the movie data from an API. It displays a loading spinner while fetching the data, an error,
  * or there is data available, the MovieCard component is rendered for each movie in the list.
+ * The component also has a toggle switch to switch between daily and weekly trending movies.
  * It also scrolls the window to the top when the component mounts.
  * @returns JSX.Element - The rendered component.
  */
 const TrendyMovies: FC = () => {
-  const { data, loading, error } = useFetchMovies();
+  const [period, setPeriod] = useState<'day' | 'week'>('day');
+  const { data, loading, error } = useFetchMovies(period);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleToggle = () => {
+    setPeriod((prev) => (prev === 'day' ? 'week' : 'day'));
+  };
 
   if (loading) {
     return (
@@ -30,9 +43,7 @@ const TrendyMovies: FC = () => {
 
   if (error) {
     return (
-      <CenterContainer>
-        <Alert severity="error">{error}</Alert>
-      </CenterContainer>
+      <CenterContainer><Alert severity="error">{error}</Alert></CenterContainer>
     );
   }
 
@@ -46,6 +57,10 @@ const TrendyMovies: FC = () => {
       <Title variant="h3" gutterBottom>
         {content.title}
       </Title>
+      <FormControlLabel
+        label={`${content.view} ${period === 'day' ? 'day' : 'week'}${content.trendingMovies}`}
+        control={<Switch checked={period === 'week'} onChange={handleToggle} color="primary" />}
+      />
       <MovieListContainer>
         {data.results.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
@@ -60,6 +75,8 @@ export default TrendyMovies;
 const content = {
   noData: 'No data available',
   title: 'Trendy Movie List',
+  view: 'View the',
+  trendingMovies: "'s trending movies",
 };
 
 const StyledContainer = styled(Container)`

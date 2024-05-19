@@ -12,10 +12,11 @@ interface UseFetchMoviesParams {
 }
 
 /**
- * Custom Hook to retrieve the movie list from the API.
- * @returns {UseFetchMoviesParams} List of films, loading status and errors.
+ * This hook fetches trending movies from the API.
+ * @param period The period for which to fetch trending movies.
+ * @returns An object containing the fetched data, loading state, and error message.
  */
-const useFetchMovies = (): UseFetchMoviesParams => {
+const useFetchMovies = (period: 'day' | 'week'): UseFetchMoviesParams => {
   const [data, setData] = useState<MovieResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +31,7 @@ const useFetchMovies = (): UseFetchMoviesParams => {
     try {
       setLoading(true);
       const response = await axios.get<MovieResponse | ApiError>(
-        'https://api.themoviedb.org/3/movie/popular',
+        `https://api.themoviedb.org/3/trending/movie/${period}`,
         {
           headers: {
             Authorization: `Bearer ${apiKey}`,
@@ -59,7 +60,7 @@ const useFetchMovies = (): UseFetchMoviesParams => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [period]);
 
   useEffect(() => {
     void fetchMovies();
